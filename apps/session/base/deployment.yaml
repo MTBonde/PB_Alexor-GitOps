@@ -1,0 +1,41 @@
+# Session Deployment - Session management service
+# Se apps/auth/base/deployment.yaml for detaljerede kommentarer
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: session
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: session
+  template:
+    metadata:
+      labels:
+        app: session
+        alexor-service: "true"
+    spec:
+      containers:
+      - name: session
+        image: ghcr.io/mtbonde/hagi-sessionservice:0.4.0
+        ports:
+        - containerPort: 8080
+
+        startupProbe:
+          tcpSocket:
+            port: 8080
+          failureThreshold: 30
+          periodSeconds: 10
+
+        livenessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5

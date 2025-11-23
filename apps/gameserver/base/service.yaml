@@ -1,0 +1,19 @@
+# Gameserver Service
+# Se apps/auth/base/service.yaml for detaljerede kommentarer
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: gameserver
+spec:
+  selector:
+    app: gameserver
+  ports:
+  - name: game-udp
+    port: 7777
+    targetPort: 7777
+    protocol: UDP           # Vigtigt: UDP skal specificeres eksplicit
+  - name: http
+    port: 8080
+    targetPort: 8080
+  type: ClusterIP

@@ -1,0 +1,11 @@
+# Kubernetes Namespace for dev miljø
+# Namespaces isolerer resources fra hinanden i clusteret
+# Alle services i dette miljø deployes til dette namespace
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev
+  labels:
+    environment: dev           # Label til filtrering og policies
+    managed-by: flux           # Viser at Flux styrer denne resource

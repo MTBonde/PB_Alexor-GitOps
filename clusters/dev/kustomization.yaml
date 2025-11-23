@@ -1,0 +1,26 @@
+# Kustomize konfiguration for dev miljø
+# Denne fil samler alle resources der skal deployes til dev cluster
+# Kustomize merger alle refererede filer til én samlet YAML output
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# resources: Liste af filer/mapper der skal inkluderes
+# Rækkefølgen er vigtig - infrastructure først, så services
+resources:
+  # Flux system komponenter (GitOps controller)
+  - flux-system
+
+  # Namespace - skal oprettes først
+  - namespace.yaml
+
+  # Infrastructure - skal deployes først da services afhænger af dem
+  - ../../apps/rabbitmq/overlays/dev    # Message broker
+  - ../../apps/redis/overlays/dev       # Cache/session store
+
+  # Platform services - afhænger af infrastructure
+  - ../../apps/auth/overlays/dev        # Authentication service
+  - ../../apps/registry/overlays/dev    # Game server registry
+  - ../../apps/relay/overlays/dev       # WebSocket relay (bruger RabbitMQ)
+  - ../../apps/session/overlays/dev     # Session management
+  - ../../apps/gameserver/overlays/dev  # Unreal game server

@@ -1,0 +1,25 @@
+# Kustomize overlay for auth i dev miljø
+# Overlays tilføjer miljøspecifikke ændringer oven på base
+# Kan overskrive værdier, tilføje patches, ændre namespace, etc.
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# namespace: Alle resources i denne overlay får dette namespace
+# Overskriver eventuelle namespaces i base
+namespace: dev
+
+# resources: Reference til base konfiguration
+# ../../base peger på apps/auth/base/
+resources:
+  - ../../base
+
+# Her kan tilføjes patches for miljøspecifikke ændringer:
+# patches:
+#   - patch: |-
+#       - op: replace
+#         path: /spec/replicas
+#         value: 2
+#     target:
+#       kind: Deployment
+#       name: auth

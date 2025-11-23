@@ -1,0 +1,10 @@
+# Kustomize overlay for session i staging miljø
+# Se apps/auth/overlays/dev/kustomization.yaml for detaljerede kommentarer
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: staging
+
+resources:
+  - ../../base

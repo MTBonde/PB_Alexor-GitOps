@@ -1,0 +1,14 @@
+# Session Service
+# Se apps/auth/base/service.yaml for detaljerede kommentarer
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: session    # Tilgås via "http://session:8080"
+spec:
+  selector:
+    app: session
+  ports:
+  - port: 8080
+    targetPort: 8080
+  type: ClusterIP

@@ -1,0 +1,10 @@
+# Kustomize overlay for session i prod miljø
+# Se apps/auth/overlays/dev/kustomization.yaml for detaljerede kommentarer
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: prod
+
+resources:
+  - ../../base

@@ -1,0 +1,9 @@
+# Kustomize konfiguration for Relay service
+# Se apps/auth/base/ for detaljerede kommentarer
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - deployment.yaml
+  - service.yaml

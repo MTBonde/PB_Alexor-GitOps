@@ -1,0 +1,24 @@
+# Kubernetes Service for auth
+# En Service giver stabil netværksadgang til pods
+# Pods kan dø og genstartes, men Service DNS-navn forbliver det samme
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth    # DNS-navn: andre pods kan tilgå via "http://auth:8080"
+spec:
+  # selector: Hvilke pods denne Service sender trafik til
+  # Matcher labels i Deployment template
+  selector:
+    app: auth
+
+  # ports: Port mapping
+  ports:
+  - port: 8080          # Port Service lytter på (cluster-intern)
+    targetPort: 8080    # Port i containeren
+
+  # type: Hvordan Service eksponeres
+  # ClusterIP: Kun tilgængelig inden i cluster (default, mest sikker)
+  # NodePort: Tilgængelig på alle nodes' IP + en port (30000-32767)
+  # LoadBalancer: Ekstern load balancer (cloud providers)
+  type: ClusterIP
