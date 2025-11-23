@@ -1,0 +1,74 @@
+# RabbitMQ Deployment - Message broker for async kommunikation
+# Se apps/auth/base/deployment.yaml for detaljerede kommentarer om probes
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rabbitmq
+  template:
+    metadata:
+      labels:
+        app: rabbitmq
+        alexor-service: "true"
+    spec:
+      containers:
+      - name: rabbitmq
+        image: rabbitmq:4-management    # Med management UI på port 15672
+
+        ports:
+        - containerPort: 5672           # AMQP protokol (message queue)
+          name: amqp
+        - containerPort: 15672          # Management web UI
+          name: management
+
+        # command: Overskriver default container startup
+        # Sætter Erlang cookie (cluster authentication) og starter RabbitMQ
+        command:
+        - sh
+        - -c
+        - echo ALEXORDEVRABBITCOOKIE123456789 > /var/lib/rabbitmq/.erlang.cookie && chmod 600 /var/lib/rabbitmq/.erlang.cookie && docker-entrypoint.sh rabbitmq-server
+
+        # Probes bruger rabbitmq-diagnostics til health check
+        startupProbe:
+          exec:
+            command:
+            - rabbitmq-diagnostics
+            - -q
+            - ping
+          failureThreshold: 30
+          periodSeconds: 10
+
+        livenessProbe:
+          exec:
+            command:
+            - rabbitmq-diagnostics
+            - -q
+            - ping
+          initialDelaySeconds: 60       # RabbitMQ tager lang tid at starte
+          periodSeconds: 30
+
+        readinessProbe:
+          exec:
+            command:
+            - rabbitmq-diagnostics
+            - -q
+            - ping
+          initialDelaySeconds: 10
+          periodSeconds: 5
+
+        # volumeMounts: Hvor i containeren volume mountes
+        volumeMounts:
+        - name: rabbitmq-data
+          mountPath: /var/lib/rabbitmq
+
+      # volumes: Definerer volumes tilgængelige for containere
+      # emptyDir: Midlertidig storage (slettes når pod dør)
+      # I produktion: brug PersistentVolumeClaim for at bevare data
+      volumes:
+      - name: rabbitmq-data
+        emptyDir: {}

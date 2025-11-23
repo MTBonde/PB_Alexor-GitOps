@@ -1,0 +1,48 @@
+# Redis Deployment - In-memory cache og session store
+# Se apps/auth/base/deployment.yaml for detaljerede kommentarer
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+        alexor-service: "true"
+    spec:
+      containers:
+      - name: redis
+        image: redis:7-alpine    # Alpine = minimal image size
+        ports:
+        - containerPort: 6379
+
+        # redis-cli ping returnerer PONG hvis Redis er klar
+        startupProbe:
+          exec:
+            command:
+            - redis-cli
+            - ping
+          failureThreshold: 30
+          periodSeconds: 10
+
+        livenessProbe:
+          exec:
+            command:
+            - redis-cli
+            - ping
+          initialDelaySeconds: 30
+          periodSeconds: 10
+
+        readinessProbe:
+          exec:
+            command:
+            - redis-cli
+            - ping
+          initialDelaySeconds: 5
+          periodSeconds: 5

@@ -1,0 +1,57 @@
+# Gameserver Deployment - Unreal Engine dedicated server
+# Se apps/auth/base/deployment.yaml for detaljerede kommentarer
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gameserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gameserver
+  template:
+    metadata:
+      labels:
+        app: gameserver
+        alexor-service: "true"
+    spec:
+      containers:
+      - name: gameserver
+        image: ghcr.io/alexanderlind98/unrealmp_server:latest
+        ports:
+        - containerPort: 7777
+          protocol: UDP           # UDP for game traffic (lavere latency)
+          name: game-udp
+        - containerPort: 8080
+          name: http              # HTTP for health checks og API
+
+        # env: Environment variabler til containeren
+        # Konfigurerer gameserver uden at ændre image
+        env:
+        - name: SERVER_HOST
+          value: "0.0.0.0"        # Lyt på alle interfaces
+        - name: SERVER_PORT
+          value: "7777"
+        - name: REGISTRY_URL
+          value: "http://registry:8080"    # Service discovery via DNS
+        - name: REGISTRY_ENDPOINT
+          value: "/api/v0.3.0/Registry/register"
+
+        startupProbe:
+          tcpSocket:
+            port: 8080
+          failureThreshold: 30
+          periodSeconds: 10
+
+        livenessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 30         # Unreal tager lang tid at starte
+          periodSeconds: 10
+
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 5

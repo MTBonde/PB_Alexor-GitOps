@@ -1,0 +1,25 @@
+# Flux Kustomization CR for staging miljø
+# Se clusters/dev/alexor-apps.yaml for detaljerede kommentarer
+
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: alexor-apps
+  namespace: flux-system
+spec:
+  interval: 5m
+  path: ./clusters/staging
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  healthChecks:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: rabbitmq
+      namespace: staging
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: redis
+      namespace: staging
+  timeout: 3m

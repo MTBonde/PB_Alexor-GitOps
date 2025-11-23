@@ -1,0 +1,40 @@
+# Flux Kustomization CR (Custom Resource)
+# Denne fil fortæller Flux HVAD der skal synkroniseres og HVORDAN
+# Flux læser denne og anvender alle resources fra 'path' til clusteret
+
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: alexor-apps           # Navn på denne Flux Kustomization
+  namespace: flux-system      # Flux komponenter kører i flux-system namespace
+spec:
+  # interval: Hvor ofte Flux checker for ændringer i Git
+  interval: 5m
+
+  # path: Hvilken mappe i Git repo der skal synkroniseres
+  # Flux kører 'kustomize build' på denne mappe
+  path: ./clusters/dev
+
+  # prune: Slet resources fra cluster hvis de fjernes fra Git
+  # VIGTIGT: Sikrer cluster matcher Git (drift detection)
+  prune: true
+
+  # sourceRef: Reference til GitRepository (oprettet af Flux bootstrap)
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+
+  # healthChecks: Vent på disse deployments er "Ready" før success
+  # Bruges til at sikre infrastructure er oppe før services deployes
+  healthChecks:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: rabbitmq
+      namespace: dev
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: redis
+      namespace: dev
+
+  # timeout: Max tid Flux venter på healthChecks
+  timeout: 3m

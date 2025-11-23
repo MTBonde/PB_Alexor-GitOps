@@ -1,0 +1,14 @@
+# Redis Service
+# Se apps/auth/base/service.yaml for detaljerede kommentarer
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis    # Tilgås via "redis:6379"
+spec:
+  selector:
+    app: redis
+  ports:
+  - port: 6379
+    targetPort: 6379
+  type: ClusterIP

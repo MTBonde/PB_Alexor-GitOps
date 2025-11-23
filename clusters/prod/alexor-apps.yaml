@@ -1,0 +1,26 @@
+# Flux Kustomization CR for prod miljø
+# Se clusters/dev/alexor-apps.yaml for detaljerede kommentarer
+# Prod har længere interval og timeout for stabilitet
+
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: alexor-apps
+  namespace: flux-system
+spec:
+  interval: 10m    # Længere interval i prod for stabilitet
+  path: ./clusters/prod
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  healthChecks:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: rabbitmq
+      namespace: prod
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: redis
+      namespace: prod
+  timeout: 5m      # Længere timeout i prod

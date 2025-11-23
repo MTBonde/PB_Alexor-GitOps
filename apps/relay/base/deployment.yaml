@@ -1,0 +1,47 @@
+# Relay Deployment - WebSocket relay service
+# Bruger RabbitMQ til at relay beskeder mellem klienter
+# Se apps/auth/base/deployment.yaml for detaljerede kommentarer
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: relay
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: relay
+  template:
+    metadata:
+      labels:
+        app: relay
+        alexor-service: "true"
+    spec:
+      containers:
+      - name: relay
+        image: ghcr.io/mtbonde/hagi-relayservice:0.5.4
+        ports:
+        - containerPort: 8080
+
+        # Relay afhænger af RabbitMQ - env variabel konfigurerer connection
+        env:
+        - name: RABBITMQ_HOST
+          value: "rabbitmq"       # Service discovery via Kubernetes DNS
+
+        startupProbe:
+          tcpSocket:
+            port: 8080
+          failureThreshold: 30
+          periodSeconds: 10
+
+        livenessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 10    # Vent på RabbitMQ connection
+          periodSeconds: 5

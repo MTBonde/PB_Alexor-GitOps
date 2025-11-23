@@ -1,0 +1,14 @@
+# Relay Service
+# Se apps/auth/base/service.yaml for detaljerede kommentarer
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: relay    # Tilgås via "http://relay:8080"
+spec:
+  selector:
+    app: relay
+  ports:
+  - port: 8080
+    targetPort: 8080
+  type: ClusterIP

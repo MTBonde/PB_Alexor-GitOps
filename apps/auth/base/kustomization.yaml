@@ -1,0 +1,11 @@
+# Kustomize konfiguration for auth service base
+# Base indeholder den grundlæggende konfiguration der deles på tværs af miljøer
+# Overlays (dev/staging/prod) kan overskrive/tilføje til denne
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# resources: Filer der skal inkluderes i denne Kustomization
+resources:
+  - deployment.yaml    # Definerer hvordan pods køres
+  - service.yaml       # Netværksadgang til pods
