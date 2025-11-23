@@ -31,13 +31,13 @@ Start med at læse:
 ## Repositories
 
 ### Platform Services
-| Service    | Repository                                                                              |
-|------------|-----------------------------------------------------------------------------------------|
-| Auth       | [PB_SI_HAGI_AuthService](https://github.com/MTBonde/PB_SI_HAGI_AuthService)             |
-| Registry   | [PB_SI_HAGI_RegistryService](https://github.com/MTBonde/PB_SI_HAGI_RegistryService)     |
-| Session    | [PB_SI_HAGI_SessionService](https://github.com/MTBonde/PB_SI_HAGI_SessionService)       |
-| Relay      | [PB_SI_HAGI_RelayService](https://github.com/MTBonde/PB_SI_HAGI_RelayService)           |
-| GameServer | [PB_SI_HAGI_GameServerService](https://github.com/MTBonde/PB_SI_HAGI_GameServerService) |
+| Repository                                                                              | Service    |
+|-----------------------------------------------------------------------------------------|------------|
+| [PB_SI_HAGI_AuthService](https://github.com/MTBonde/PB_SI_HAGI_AuthService)             | Auth       |
+| [PB_SI_HAGI_RegistryService](https://github.com/MTBonde/PB_SI_HAGI_RegistryService)     | Registry   |
+| [PB_SI_HAGI_SessionService](https://github.com/MTBonde/PB_SI_HAGI_SessionService)       | Session    |
+| [PB_SI_HAGI_RelayService](https://github.com/MTBonde/PB_SI_HAGI_RelayService)           | Relay      |
+| [PB_SI_HAGI_GameServerService](https://github.com/MTBonde/PB_SI_HAGI_GameServerService) | GameServer |
 
 ### Infrastructure
 | Repo                                                                  | Beskrivelse                                      |
