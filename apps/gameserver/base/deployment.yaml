@@ -23,8 +23,8 @@ spec:
         - containerPort: 7777
           protocol: UDP           # UDP for game traffic (lavere latency)
           name: game-udp
-        - containerPort: 8080
-          name: http              # HTTP for health checks og API
+        # Port 8080 fjernet - Unreal eksponerer ikke HTTP endpoint
+        # Health monitoring håndteres af Registry via heartbeat
 
         # env: Environment variabler til containeren
         # Konfigurerer gameserver uden at ændre image
@@ -38,20 +38,7 @@ spec:
         - name: REGISTRY_ENDPOINT
           value: "/api/v0.3.0/Registry/register"
 
-        startupProbe:
-          tcpSocket:
-            port: 8080
-          failureThreshold: 30
-          periodSeconds: 10
-
-        livenessProbe:
-          tcpSocket:
-            port: 8080
-          initialDelaySeconds: 30         # Unreal tager lang tid at starte
-          periodSeconds: 10
-
-        readinessProbe:
-          tcpSocket:
-            port: 8080
-          initialDelaySeconds: 10
-          periodSeconds: 5
+        # Kubernetes probes fravalgt bevidst:
+        # - Unreal server eksponerer kun UDP, ingen HTTP/TCP health endpoint
+        # - Registry håndterer health via heartbeat og player count
+        # - Hvis processen crasher, dør containeren og K8s restarter automatisk

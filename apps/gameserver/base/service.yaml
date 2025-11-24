@@ -13,7 +13,5 @@ spec:
     port: 7777
     targetPort: 7777
     protocol: UDP           # Vigtigt: UDP skal specificeres eksplicit
-  - name: http
-    port: 8080
-    targetPort: 8080
+  # Port 8080 fjernet - ikke brugt af Unreal server
   type: ClusterIP
