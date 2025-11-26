@@ -23,10 +23,6 @@ spec:
   values:
     # Prometheus configuration
     prometheus:
-      # Service configuration
-      service:
-        type: NodePort
-        nodePort: 30900  # Fast port - adgang via localhost:30900
       prometheusSpec:
         # Retention periode for metrics
         retention: 7d
@@ -67,11 +63,6 @@ spec:
         limits:
           cpu: 500m
           memory: 512Mi
-      # Service configuration
-      service:
-        type: NodePort
-        port: 80
-        nodePort: 30300  # Fast port - adgang via localhost:30300
       # Sidecar for automatisk dashboard loading
       sidecar:
         dashboards:
@@ -83,10 +74,6 @@ spec:
     # Alertmanager configuration
     alertmanager:
       enabled: true
-      # Service configuration
-      service:
-        type: NodePort
-        nodePort: 30903  # Fast port - adgang via localhost:30903
       alertmanagerSpec:
         storage:
           volumeClaimTemplate:

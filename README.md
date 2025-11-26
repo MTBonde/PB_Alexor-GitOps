@@ -71,3 +71,20 @@ flux get kustomizations -A
 # Live watch på pods (opdaterer automatisk)
 kubectl get pods -n dev -w
 ```
+
+## Monitoring
+
+Platformen har komplet monitoring med Prometheus og Grafana deployed via GitOps.
+
+**Adgang til Grafana:**
+```bash
+kubectl port-forward svc/monitoring-kube-prometheus-stack-grafana -n monitoring 3000:80
+```
+
+Åbn browser: `http://localhost:3000`
+Login: `admin` / `admin`
+
+**Indbyggede dashboards:**
+- Kubernetes / Compute Resources / Cluster
+- Kubernetes / Compute Resources / Namespace (Pods)
+- Kubernetes / Networking / Cluster
