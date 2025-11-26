@@ -5,38 +5,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: auth    # Navn brugt til at identificere denne deployment
+  name: auth # Navn brugt til at identificere denne deployment
 spec:
   # replicas: Antal pod-kopier der skal køre
   # Kan overskrives i overlays for miljøspecifikke værdier
   replicas: 1
-
   # selector: Hvordan Deployment finder sine pods
   # SKAL matche labels i template.metadata.labels
   selector:
     matchLabels:
       app: auth
-
   # template: Skabelon for pods der oprettes
   template:
     metadata:
       # labels: Tags brugt til service discovery og selektion
       labels:
-        app: auth                    # Matcher selector ovenfor
-        alexor-service: "true"       # Bruges af NetworkPolicies
-
+        app: auth # Matcher selector ovenfor
+        alexor-service: "true" # Bruges af NetworkPolicies
     spec:
       containers:
       - name: auth
         # image: Container image der skal køres
         # Format: registry/repository:tag
         # Flux Image Automation opdaterer automatisk tag baseret på ImagePolicy
-        image: ghcr.io/mtbonde/hagi-authservice:0.5.0 # {"$imagepolicy": "flux-system:auth"}
-
+        image: ghcr.io/mtbonde/hagi-authservice:0.5.17 # {"$imagepolicy": "flux-system:auth"}
         # ports: Porte containeren lytter på
         ports:
         - containerPort: 8080
-
         # === KUBERNETES PROBES ===
         # Probes checker om containeren er sund og klar
 
@@ -46,22 +41,20 @@ spec:
         startupProbe:
           tcpSocket:
             port: 8080
-          failureThreshold: 30    # Max 30 fejl (30 * 10s = 5 min startup)
-          periodSeconds: 10       # Check hvert 10. sekund
-
+          failureThreshold: 30 # Max 30 fejl (30 * 10s = 5 min startup)
+          periodSeconds: 10 # Check hvert 10. sekund
         # livenessProbe: Checker om app stadig kører
         # Hvis den fejler, genstarter Kubernetes containeren
         livenessProbe:
           tcpSocket:
             port: 8080
-          initialDelaySeconds: 10  # Vent 10s efter startup før første check
-          periodSeconds: 10        # Check hvert 10. sekund
-
+          initialDelaySeconds: 10 # Vent 10s efter startup før første check
+          periodSeconds: 10 # Check hvert 10. sekund
         # readinessProbe: Checker om app er klar til trafik
         # Hvis den fejler, fjernes pod fra Service endpoints
         # Trafik sendes kun til "Ready" pods
         readinessProbe:
           tcpSocket:
             port: 8080
-          initialDelaySeconds: 5   # Hurtigere start end liveness
-          periodSeconds: 5         # Hyppigere checks
+          initialDelaySeconds: 5 # Hurtigere start end liveness
+          periodSeconds: 5 # Hyppigere checks
