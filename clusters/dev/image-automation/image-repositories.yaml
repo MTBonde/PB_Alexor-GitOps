@@ -1,0 +1,54 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: auth
+  namespace: flux-system
+spec:
+  image: ghcr.io/mtbonde/hagi-authservice
+  interval: 1m0s
+  secretRef:
+    name: ghcr-secret
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: session
+  namespace: flux-system
+spec:
+  image: ghcr.io/mtbonde/hagi-sessionservice
+  interval: 1m0s
+  secretRef:
+    name: ghcr-secret
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: registry
+  namespace: flux-system
+spec:
+  image: ghcr.io/mtbonde/hagi-registryservice
+  interval: 1m0s
+  secretRef:
+    name: ghcr-secret
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: relay
+  namespace: flux-system
+spec:
+  image: ghcr.io/mtbonde/hagi-relayservice
+  interval: 1m0s
+  secretRef:
+    name: ghcr-secret
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: gameserver
+  namespace: flux-system
+spec:
+  image: ghcr.io/alexanderlind98/unrealmp_server
+  interval: 1m0s
+  secretRef:
+    name: ghcr-secret
