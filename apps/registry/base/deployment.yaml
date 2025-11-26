@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: registry
-        image: ghcr.io/mtbonde/hagi-registryservice:0.3.0
+        image: ghcr.io/mtbonde/hagi-registryservice:0.4.1 # {"$imagepolicy": "flux-system:registry"}
         ports:
         - containerPort: 8080
 

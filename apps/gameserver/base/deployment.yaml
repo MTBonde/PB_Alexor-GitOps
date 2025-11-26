@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: gameserver
-        image: ghcr.io/alexanderlind98/unrealmp_server:1.6.4
+        image: ghcr.io/alexanderlind98/unrealmp_server:1.6.4 # {"$imagepolicy": "flux-system:gameserver"}
         ports:
         - containerPort: 7777
           protocol: UDP           # UDP for game traffic (lavere latency)

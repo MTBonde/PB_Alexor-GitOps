@@ -30,7 +30,8 @@ spec:
       - name: auth
         # image: Container image der skal køres
         # Format: registry/repository:tag
-        image: ghcr.io/mtbonde/hagi-authservice:0.4.0
+        # Flux Image Automation opdaterer automatisk tag baseret på ImagePolicy
+        image: ghcr.io/mtbonde/hagi-authservice:0.5.17 # {"$imagepolicy": "flux-system:auth"}
 
         # ports: Porte containeren lytter på
         ports:

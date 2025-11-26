@@ -6,7 +6,3 @@ kind: Kustomization
 namespace: dev
 resources:
   - ../../base
-images:
-  - name: ghcr.io/mtbonde/hagi-registryservice
-    newName: ghcr.io/mtbonde/hagi-registryservice
-    newTag: ghcr.io/mtbonde/hagi-registryservice:0.4.1 # {"$imagepolicy": "flux-system:registry"}

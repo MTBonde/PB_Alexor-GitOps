@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: relay
-        image: ghcr.io/mtbonde/hagi-relayservice:0.5.4
+        image: ghcr.io/mtbonde/hagi-relayservice:0.6.1 # {"$imagepolicy": "flux-system:relay"}
         ports:
         - containerPort: 8080
 

@@ -6,7 +6,3 @@ kind: Kustomization
 namespace: dev
 resources:
   - ../../base
-images:
-  - name: ghcr.io/mtbonde/hagi-relayservice
-    newName: ghcr.io/mtbonde/hagi-relayservice
-    newTag: ghcr.io/mtbonde/hagi-relayservice:0.6.1 # {"$imagepolicy": "flux-system:relay"}

@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: session
-        image: ghcr.io/mtbonde/hagi-sessionservice:0.4.0
+        image: ghcr.io/mtbonde/hagi-sessionservice:0.5.0 # {"$imagepolicy": "flux-system:session"}
         ports:
         - containerPort: 8080
 
