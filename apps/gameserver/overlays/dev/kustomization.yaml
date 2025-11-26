@@ -9,4 +9,4 @@ resources:
 images:
   - name: ghcr.io/alexanderlind98/unrealmp_server
     newName: ghcr.io/alexanderlind98/unrealmp_server
-    newTag: 1.6.4 # {"$imagepolicy": "flux-system:gameserver"}
+    newTag: ghcr.io/alexanderlind98/unrealmp_server:1.6.4 # {"$imagepolicy": "flux-system:gameserver"}

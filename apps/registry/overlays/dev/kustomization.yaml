@@ -9,4 +9,4 @@ resources:
 images:
   - name: ghcr.io/mtbonde/hagi-registryservice
     newName: ghcr.io/mtbonde/hagi-registryservice
-    newTag: 0.4.1 # {"$imagepolicy": "flux-system:registry"}
+    newTag: ghcr.io/mtbonde/hagi-registryservice:0.4.1 # {"$imagepolicy": "flux-system:registry"}
