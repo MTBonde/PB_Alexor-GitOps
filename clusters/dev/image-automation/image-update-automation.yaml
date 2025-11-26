@@ -19,21 +19,10 @@ spec:
       messageTemplate: |
         chore: update images in dev environment
 
-        Automation Name: {{ .AutomationObject }}
+        Automation: {{ .AutomationObject }}
 
-        Files updated:
-        {{ range $filename, $_ := .Changed.Files -}}
-        - {{ $filename }}
-        {{ end -}}
-
-        Objects updated:
-        {{ range $resource, $_ := .Changed.Objects -}}
-        - {{ $resource.Kind }} {{ $resource.Name }}
-        {{ end -}}
-
-        Images updated:
-        {{ range $image, $_ := .Changed.Images -}}
-        - {{ $image }}
+        {{ range .Changed.Changes -}}
+        - {{ .OldValue }} -> {{ .NewValue }}
         {{ end -}}
 
         [ci skip]
