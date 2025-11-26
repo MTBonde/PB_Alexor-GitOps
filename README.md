@@ -37,7 +37,7 @@ Start med at læse:
 | [PB_SI_HAGI_RegistryService](https://github.com/MTBonde/PB_SI_HAGI_RegistryService)     | Registry   |
 | [PB_SI_HAGI_SessionService](https://github.com/MTBonde/PB_SI_HAGI_SessionService)       | Session    |
 | [PB_SI_HAGI_RelayService](https://github.com/MTBonde/PB_SI_HAGI_RelayService)           | Relay      |
-| [PB_SI_HAGI_GameServerService](https://github.com/MTBonde/PB_SI_HAGI_GameServerService) | GameServer |
+| [unrealmp_server](https://github.com/alexanderlind98/unrealmp_server) | GameServer |
 
 ### Infrastructure
 | Repo                                                                  | Beskrivelse                                      |
