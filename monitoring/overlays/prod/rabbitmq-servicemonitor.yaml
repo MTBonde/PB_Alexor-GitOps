@@ -1,0 +1,23 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: rabbitmq
+  namespace: monitoring
+  labels:
+    app: rabbitmq
+    release: kube-prometheus-stack
+spec:
+  # Selector for at finde RabbitMQ service
+  selector:
+    matchLabels:
+      app: rabbitmq
+  # Namespace hvor RabbitMQ kører
+  namespaceSelector:
+    matchNames:
+      - prod
+  # Endpoint configuration for metrics scraping
+  endpoints:
+    - port: management
+      path: /metrics
+      interval: 30s
+      scheme: http
