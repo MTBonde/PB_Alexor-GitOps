@@ -8,3 +8,8 @@ namespace: dev
 
 resources:
   - ../../base
+
+images:
+  - name: ghcr.io/mtbonde/hagi-registryservice
+    newName: ghcr.io/mtbonde/hagi-registryservice
+    newTag: 0.3.0 # {"$imagepolicy": "flux-system:registry"}

@@ -1,0 +1,59 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: auth
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: auth
+  policy:
+    semver:
+      range: ">=0.1.0"
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: session
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: session
+  policy:
+    semver:
+      range: ">=0.1.0"
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: registry
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: registry
+  policy:
+    semver:
+      range: ">=0.1.0"
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: relay
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: relay
+  policy:
+    semver:
+      range: ">=0.1.0"
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: gameserver
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: gameserver
+  policy:
+    semver:
+      range: ">=1.0.0"

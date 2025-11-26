@@ -14,6 +14,13 @@ namespace: dev
 resources:
   - ../../base
 
+# images: Overskriver container images fra base
+# Flux Image Automation opdaterer automatisk newTag baseret på ImagePolicy
+images:
+  - name: ghcr.io/mtbonde/hagi-authservice
+    newName: ghcr.io/mtbonde/hagi-authservice
+    newTag: 0.4.0 # {"$imagepolicy": "flux-system:auth"}
+
 # Her kan tilføjes patches for miljøspecifikke ændringer:
 # patches:
 #   - patch: |-

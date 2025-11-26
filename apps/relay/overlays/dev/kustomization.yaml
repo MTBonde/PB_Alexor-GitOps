@@ -8,3 +8,8 @@ namespace: dev
 
 resources:
   - ../../base
+
+images:
+  - name: ghcr.io/mtbonde/hagi-relayservice
+    newName: ghcr.io/mtbonde/hagi-relayservice
+    newTag: 0.5.4 # {"$imagepolicy": "flux-system:relay"}
