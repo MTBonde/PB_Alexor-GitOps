@@ -11,7 +11,7 @@ spec:
     branch: main
   secretRef:
     name: flux-system
-  url: ssh://git@github.com/MTBonde/PB_Alexor-GitOps
+  url: https://github.com/MTBonde/PB_Alexor-GitOps
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
