@@ -3,13 +3,10 @@
 
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-
 namespace: dev
-
 resources:
   - ../../base
-
 images:
   - name: ghcr.io/mtbonde/hagi-sessionservice
     newName: ghcr.io/mtbonde/hagi-sessionservice
-    newTag: 0.4.0 # {"$imagepolicy": "flux-system:session"}
+    newTag: ghcr.io/mtbonde/hagi-sessionservice:0.5.0 # {"$imagepolicy": "flux-system:session"}

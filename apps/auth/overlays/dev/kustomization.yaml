@@ -4,22 +4,19 @@
 
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-
 # namespace: Alle resources i denne overlay får dette namespace
 # Overskriver eventuelle namespaces i base
 namespace: dev
-
 # resources: Reference til base konfiguration
 # ../../base peger på apps/auth/base/
 resources:
   - ../../base
-
 # images: Overskriver container images fra base
 # Flux Image Automation opdaterer automatisk newTag baseret på ImagePolicy
 images:
   - name: ghcr.io/mtbonde/hagi-authservice
     newName: ghcr.io/mtbonde/hagi-authservice
-    newTag: 0.4.0 # {"$imagepolicy": "flux-system:auth"}
+    newTag: ghcr.io/mtbonde/hagi-authservice:0.5.17 # {"$imagepolicy": "flux-system:auth"}
 
 # Her kan tilføjes patches for miljøspecifikke ændringer:
 # patches:
