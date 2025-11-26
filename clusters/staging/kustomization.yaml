@@ -17,6 +17,7 @@ resources:
   # Infrastructure - skal deployes først da services afhænger af dem
   - ../../apps/rabbitmq/overlays/staging
   - ../../apps/redis/overlays/staging
+  - ../../monitoring/overlays/staging    # Monitoring stack (Prometheus + Grafana)
 
   # Platform services - afhænger af infrastructure
   - ../../apps/auth/overlays/staging

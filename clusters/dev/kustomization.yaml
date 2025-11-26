@@ -20,6 +20,7 @@ resources:
   # Infrastructure - skal deployes først da services afhænger af dem
   - ../../apps/rabbitmq/overlays/dev    # Message broker
   - ../../apps/redis/overlays/dev       # Cache/session store
+  - ../../monitoring/overlays/dev       # Monitoring stack (Prometheus + Grafana)
 
   # Platform services - afhænger af infrastructure
   - ../../apps/auth/overlays/dev        # Authentication service
