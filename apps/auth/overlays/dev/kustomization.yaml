@@ -16,7 +16,7 @@ resources:
 images:
   - name: ghcr.io/mtbonde/hagi-authservice
     newName: ghcr.io/mtbonde/hagi-authservice
-    newTag: ghcr.io/mtbonde/hagi-authservice:0.5.17 # {"$imagepolicy": "flux-system:auth"}
+    newTag: 0.5.17 # {"$imagepolicy": "flux-system:auth"}
 
 # Her kan tilføjes patches for miljøspecifikke ændringer:
 # patches:
