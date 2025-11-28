@@ -63,10 +63,6 @@ spec:
         limits:
           cpu: 500m
           memory: 512Mi
-      # Service configuration
-      service:
-        type: ClusterIP
-        port: 80
       # Sidecar for automatisk dashboard loading
       sidecar:
         dashboards:

@@ -5,4 +5,5 @@ namespace: monitoring
 
 resources:
   - ../../base
-  - rabbitmq-servicemonitor.yaml
+  # ServiceMonitor applied manually - will be added back after CRDs are stable
+  # - rabbitmq-servicemonitor.yaml
