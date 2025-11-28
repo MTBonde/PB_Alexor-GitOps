@@ -30,9 +30,9 @@ spec:
         # Konfigurerer gameserver uden at ændre image
         env:
         - name: SERVER_HOST
-          value: "127.0.1.1"        # Lyt på alle interfaces
+          value: "127.0.0.1"        # Lyt på alle interfaces
         - name: SERVER_PORT
-          value: "7777"
+          value: "30502"
         - name: REGISTRY_URL
           value: "http://registry:8080"    # Service discovery via DNS
         - name: REGISTRY_ENDPOINT
