@@ -16,9 +16,10 @@ spec:
   ports:
   - port: 8080          # Port Service lytter på (cluster-intern)
     targetPort: 8080    # Port i containeren
+    nodePort: 30500
 
   # type: Hvordan Service eksponeres
   # ClusterIP: Kun tilgængelig inden i cluster (default, mest sikker)
   # NodePort: Tilgængelig på alle nodes' IP + en port (30000-32767)
   # LoadBalancer: Ekstern load balancer (cloud providers)
-  type: ClusterIP
+  type: NodePort
