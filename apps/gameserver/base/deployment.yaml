@@ -18,10 +18,10 @@ spec:
     spec:
       containers:
       - name: gameserver
-        image: ghcr.io/alexanderlind98/unrealmp_server:1.6.4 # {"$imagepolicy": "flux-system:gameserver"}
+        image: ghcr.io/alexanderlind98/unrealmp_server:1.7.3 # {"$imagepolicy": "flux-system:gameserver"}
         ports:
         - containerPort: 7777
-          protocol: UDP           # UDP for game traffic (lavere latency)
+          protocol: UDP # UDP for game traffic (lavere latency)
           name: game-udp
         # Port 8080 fjernet - Unreal eksponerer ikke HTTP endpoint
         # Health monitoring håndteres af Registry via heartbeat
@@ -30,15 +30,15 @@ spec:
         # Konfigurerer gameserver uden at ændre image
         env:
         - name: SERVER_HOST
-          value: "127.0.0.1"        # Lyt på alle interfaces
+          value: "127.0.0.1" # Lyt på alle interfaces
         - name: SERVER_PORT
           value: "30502"
         - name: REGISTRY_URL
-          value: "http://registry:8080"    # Service discovery via DNS
+          value: "http://registry:8080" # Service discovery via DNS
         - name: REGISTRY_ENDPOINT
           value: "/api/v0.3.0/Registry/register"
 
-        # Kubernetes probes fravalgt bevidst:
-        # - Unreal server eksponerer kun UDP, ingen HTTP/TCP health endpoint
-        # - Registry håndterer health via heartbeat og player count
-        # - Hvis processen crasher, dør containeren og K8s restarter automatisk
+# Kubernetes probes fravalgt bevidst:
+# - Unreal server eksponerer kun UDP, ingen HTTP/TCP health endpoint
+# - Registry håndterer health via heartbeat og player count
+# - Hvis processen crasher, dør containeren og K8s restarter automatisk
