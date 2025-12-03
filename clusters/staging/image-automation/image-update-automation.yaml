@@ -1,7 +1,7 @@
 apiVersion: image.toolkit.fluxcd.io/v1beta2
 kind: ImageUpdateAutomation
 metadata:
-  name: alexor-dev-images
+  name: alexor-staging-images
   namespace: flux-system
 spec:
   interval: 1m0s
@@ -17,7 +17,7 @@ spec:
         email: fluxcdbot@users.noreply.github.com
         name: fluxcdbot
       messageTemplate: |
-        chore: update images in dev environment
+        chore: update images in environments
 
         Automation: {{ .AutomationObject }}
 

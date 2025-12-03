@@ -11,9 +11,6 @@ resources:
   # Flux system komponenter (GitOps controller)
   - flux-system
 
-  # Flux Image Automation - automatisk image opdateringer
-  - image-automation
-
   # Namespace - skal oprettes først
   - namespace.yaml
 
