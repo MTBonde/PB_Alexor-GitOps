@@ -6,7 +6,8 @@ kind: Deployment
 metadata:
   name: gameserver
 spec:
-  replicas: 1
+  # replicas udeladt med vilje
+  # replicas: 1
   selector:
     matchLabels:
       app: gameserver
