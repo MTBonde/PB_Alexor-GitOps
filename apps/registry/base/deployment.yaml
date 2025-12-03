@@ -19,22 +19,19 @@ spec:
     spec:
       containers:
       - name: registry
-        image: ghcr.io/mtbonde/hagi-registryservice:0.4.1 # {"$imagepolicy": "flux-system:registry"}
+        image: ghcr.io/mtbonde/hagi-registryservice:0.5.0 # {"$imagepolicy": "flux-system:registry"}
         ports:
         - containerPort: 8080
-
         startupProbe:
           tcpSocket:
             port: 8080
           failureThreshold: 30
           periodSeconds: 10
-
         livenessProbe:
           tcpSocket:
             port: 8080
           initialDelaySeconds: 10
           periodSeconds: 10
-
         readinessProbe:
           tcpSocket:
             port: 8080
