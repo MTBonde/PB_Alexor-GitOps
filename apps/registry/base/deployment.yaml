@@ -17,6 +17,7 @@ spec:
         app: registry
         alexor-service: "true"
     spec:
+      serviceAccountName: registry-service-account
       containers:
       - name: registry
         image: ghcr.io/mtbonde/hagi-registryservice:0.5.0 # {"$imagepolicy": "flux-system:registry"}
