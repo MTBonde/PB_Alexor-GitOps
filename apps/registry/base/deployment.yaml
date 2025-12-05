@@ -20,7 +20,7 @@ spec:
       serviceAccountName: registry-service-account
       containers:
       - name: registry
-        image: ghcr.io/mtbonde/hagi-registryservice:0.6.12 # {"$imagepolicy": "flux-system:registry"}
+        image: ghcr.io/mtbonde/hagi-registryservice:0.6.13 # {"$imagepolicy": "flux-system:registry"}
         ports:
         - containerPort: 8080
         startupProbe:
